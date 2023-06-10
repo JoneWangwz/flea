@@ -1,0 +1,86 @@
+server:
+  port: 8011
+spring:
+  application:
+    name: user-service
+  cloud:
+    nacos:
+      server-addr: 121.4.62.117:8848
+      discovery:
+        username: nacos
+        password: nacos
+        namespace: public
+        #service:默认${spring.application.name}
+        #group: 默认DEFAULT_GROUP 更细的相同特征的服务进行归类分组
+        #weight: 通常要结合按照权重的负责均衡策略，权重越高，分别配的流量就越大
+        #ephemeral: false 默认true(临时实例)， 当服务宕机，超过心跳，会将实力剔除
+        #永久实例，哪怕宕机也不会删除
+  datasource:
+    username: root
+    password: Jira@123
+    url: jdbc:mysql://121.4.62.117:3306/flea_test?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    #   数据源其他配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+    #初始化时运行sql脚本
+    #schema: classpath:sql/schema.sql
+    initialization-mode: always
+
+    druid:
+      #开启druid 监控台servlet
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        loginPassword: 123456
+      #开启druid 监控filter
+      web-stat-filter:
+        enabled: true
+
+##设置mybatis
+#mybatis:
+#  mapper-locations: classpath:com/flea/mapper/*Mapper.xml
+#  #config-location: classpath:mybatis-config.xml
+#  typeAliasesPackage: com.flea.entity
+#  configuration:
+#    mapUnderscoreToCamelCase: true
+#mybatis配置
+mybatis-plus:
+  # 映射文件的位置
+  mapper-locations: classpath:com/flea/mapper/*Mapper.xml
+  global-config:
+    #数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID", ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: AUTO
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      field-strategy: NOT_NULL
+      #驼峰下划线转换
+      column-underline: true
+      logic-delete-value: -1
+      logic-not-delete-value: 0
+    banner: false
+  #原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+    jdbc-type-for-null: 'null'
+  # 配置包别名
+  type-aliases-package: com.flea.entity

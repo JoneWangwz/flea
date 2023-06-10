@@ -1,0 +1,26 @@
+server:
+  port: 8032
+spring:
+  application:
+    name: feign-service
+  cloud:
+    nacos:
+      server-addr: localhost:8847
+      discovery:
+        username: nacos
+        password: nacos
+        namespace: public
+logging:
+  level:
+    com.jonewang.order.feign: debug
+#feign日志局部配置
+feign:
+  client:
+    config:
+      commodity-service:
+        loggerLevel: BASIC
+        contract: feign.Contract.Default
+        connectTimeout: 5000
+        readTimeout: 10000
+        requestInterceptors:
+          com.flea.feign.interceptor.CustomFeignInterceptor

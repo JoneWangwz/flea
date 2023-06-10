@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flea.mapper.CommodityDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <!--    <resultMap id="select " type="com.flea.entity.CommodityDetail">-->
+    <!--        <id column="id" property="id" />-->
+    <!--        <result column="batch_no" property="batchNo" />-->
+    <!--        <result column="operator" property="operator" />-->
+    <!--        <result column="operate_time" property="operateTime" />-->
+    <!--        <result column="operate_type" property="operateType" />-->
+    <!--        <result column="operate_detail" property="operateDetail" />-->
+    <!--        <result column="attachment_url" property="attachmentUrl" />-->
+    <!--        <result column="upload_status" property="uploadStatus" />-->
+    <!--    </resultMap>-->
+
+    <select id="find" resultType="com.flea.entity.CommodityDetail">
+        select *
+        from test_table
+    </select>
+
+</mapper>
